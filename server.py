@@ -18,6 +18,8 @@ def main():
         log_level=settings.log_level.lower(),
         reload=False,
         workers=1,
+        proxy_headers=True,
+        forwarded_allow_ips="*",
     )
 
 

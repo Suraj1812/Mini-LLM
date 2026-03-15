@@ -23,6 +23,14 @@ def _env_path(name, default):
     return Path(value).expanduser().resolve() if value else default
 
 
+def _default_artifacts_dir():
+    # Railway injects the mounted volume path at runtime when a volume is attached.
+    railway_volume_path = os.getenv("RAILWAY_VOLUME_MOUNT_PATH")
+    if railway_volume_path:
+        return Path(railway_volume_path).expanduser().resolve()
+    return BASE_DIR / "artifacts"
+
+
 @dataclass(frozen=True)
 class Settings:
     host: str
@@ -63,8 +71,8 @@ class Settings:
 def get_settings():
     settings = Settings(
         host=os.getenv("MINI_LLM_HOST", "0.0.0.0"),
-        port=_env_int("MINI_LLM_PORT", 8000),
-        artifacts_dir=_env_path("MINI_LLM_ARTIFACTS_DIR", BASE_DIR / "artifacts"),
+        port=_env_int("MINI_LLM_PORT", _env_int("PORT", 8000)),
+        artifacts_dir=_env_path("MINI_LLM_ARTIFACTS_DIR", _default_artifacts_dir()),
         default_batch_size=_env_int("MINI_LLM_BATCH_SIZE", 32),
         default_block_size=_env_int("MINI_LLM_BLOCK_SIZE", 128),
         default_epochs=_env_int("MINI_LLM_DEFAULT_EPOCHS", 5),
