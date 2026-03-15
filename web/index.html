@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini LLM Studio</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">End-to-End Mini LLM</p>
+        <h1>Train the current model and try it from the browser.</h1>
+        <p class="lede">
+          This UI keeps the scope intentionally small: paste text, train the
+          model, then generate a response from the saved weights.
+        </p>
+      </section>
+
+      <section class="status-card">
+        <div>
+          <p class="label">Backend Status</p>
+          <h2 id="status-title">Checking...</h2>
+          <p id="status-message" class="muted">Loading current state.</p>
+        </div>
+        <dl class="status-grid">
+          <div>
+            <dt>Model Ready</dt>
+            <dd id="status-ready">No</dd>
+          </div>
+          <div>
+            <dt>Last Loss</dt>
+            <dd id="status-loss">-</dd>
+          </div>
+          <div>
+            <dt>Trained At</dt>
+            <dd id="status-trained-at">-</dd>
+          </div>
+        </dl>
+        <p id="status-error" class="error" hidden></p>
+      </section>
+
+      <section class="grid">
+        <form id="train-form" class="panel">
+          <div class="panel-head">
+            <p class="label">Training</p>
+            <h2>Build model artifacts</h2>
+          </div>
+          <label class="field">
+            <span>Training text</span>
+            <textarea
+              id="training-text"
+              name="text"
+              rows="12"
+              placeholder="Paste the text corpus used for training."
+            ></textarea>
+          </label>
+          <label class="field short">
+            <span>Epochs</span>
+            <input id="epochs" name="epochs" type="number" min="1" value="5" />
+          </label>
+          <button id="train-button" type="submit">Start training</button>
+        </form>
+
+        <form id="generate-form" class="panel">
+          <div class="panel-head">
+            <p class="label">Generation</p>
+            <h2>Run inference</h2>
+          </div>
+          <label class="field">
+            <span>Prompt</span>
+            <textarea
+              id="prompt"
+              name="prompt"
+              rows="7"
+              placeholder="Enter a prompt for the trained model."
+            ></textarea>
+          </label>
+          <label class="field short">
+            <span>Generated tokens</span>
+            <input id="length" name="length" type="number" min="1" value="50" />
+          </label>
+          <button id="generate-button" type="submit">Generate text</button>
+          <label class="field">
+            <span>Output</span>
+            <pre id="output" class="output">Your generated text will appear here.</pre>
+          </label>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
