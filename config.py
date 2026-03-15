@@ -83,7 +83,7 @@ class Settings:
 def get_settings():
     settings = Settings(
         host=os.getenv("MINI_LLM_HOST", "0.0.0.0"),
-        port=_env_int("MINI_LLM_PORT", _env_int("PORT", 8000)),
+        port=_env_int("PORT", _env_int("MINI_LLM_PORT", 8000)),
         artifacts_dir=_env_path("MINI_LLM_ARTIFACTS_DIR", _default_artifacts_dir()),
         default_batch_size=_env_int("MINI_LLM_BATCH_SIZE", 32),
         default_block_size=_env_int("MINI_LLM_BLOCK_SIZE", 128),

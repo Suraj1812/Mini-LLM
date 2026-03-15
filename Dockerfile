@@ -20,7 +20,6 @@ RUN pip install --upgrade pip \
 COPY . .
 
 ENV MINI_LLM_HOST=0.0.0.0
-ENV MINI_LLM_PORT=8000
 
 EXPOSE 8000
 
