@@ -6,7 +6,6 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from config import (
-    BASE_DIR,
     DATA_PATH,
     DEFAULT_BATCH_SIZE,
     DEFAULT_BLOCK_SIZE,
@@ -27,7 +26,7 @@ def train_model(
     learning_rate=DEFAULT_LEARNING_RATE,
     device=None,
     data_path=DATA_PATH,
-    output_dir=BASE_DIR,
+    output_dir=None,
     model_path=MODEL_PATH,
     progress_callback=None,
 ):
@@ -38,7 +37,8 @@ def train_model(
     target_device = device or ("cuda" if torch.cuda.is_available() else "cpu")
     data_file = Path(data_path)
     model_file = Path(model_path)
-    output_dir = Path(output_dir)
+    output_dir = Path(output_dir or model_file.parent)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     data_file.write_text(training_text, encoding="utf-8")
 

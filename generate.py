@@ -34,7 +34,7 @@ def load_runtime(
 
     tokenizer = ByteLevelBPETokenizer(str(vocab_path), str(merges_path))
     model = GPTModel(tokenizer.get_vocab_size(), block_size=block_size)
-    model.load_state_dict(torch.load(model_path, map_location=target_device))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device(target_device)))
     model.to(target_device)
     model.eval()
 

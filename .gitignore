@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+.venv/
+artifacts/
+*.pyc
+*.pyo
+*.pyd
+*.pt
+data.txt
+vocab.json
+merges.txt

@@ -60,7 +60,7 @@ async function postJson(url, payload) {
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.error || "Request failed.");
+    throw new Error(data.detail || data.error || "Request failed.");
   }
 
   return data;
