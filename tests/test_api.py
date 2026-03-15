@@ -67,7 +67,7 @@ def test_generate_uses_backend_service(tmp_path):
     for artifact in ("mini_llm.pt", "vocab.json", "merges.txt"):
         (tmp_path / artifact).write_text("stub", encoding="utf-8")
 
-    with patch("service.generate_text", return_value="hello world"):
+    with patch("service._generate_text", return_value="hello world"):
         response = client.post(
             "/api/generate",
             json={"prompt": "hello", "length": 5},

@@ -1,11 +1,20 @@
 import logging
 import threading
 
-from generate import generate_text
-from train import train_model
-
 
 LOGGER = logging.getLogger(__name__)
+
+
+def _train_model(*args, **kwargs):
+    from train import train_model
+
+    return train_model(*args, **kwargs)
+
+
+def _generate_text(*args, **kwargs):
+    from generate import generate_text
+
+    return generate_text(*args, **kwargs)
 
 
 class MiniLLMService:
@@ -37,7 +46,7 @@ class MiniLLMService:
             )
 
         try:
-            result = train_model(
+            result = _train_model(
                 text=text,
                 epochs=epochs,
                 batch_size=self.settings.default_batch_size,
@@ -66,7 +75,7 @@ class MiniLLMService:
         if self.state.snapshot()["status"] == "running":
             raise RuntimeError("Generation is unavailable while training is running.")
 
-        return generate_text(
+        return _generate_text(
             prompt=prompt,
             length=length,
             model_path=self.settings.model_path,

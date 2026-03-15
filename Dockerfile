@@ -2,7 +2,12 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PIP_NO_CACHE_DIR=1
+ENV PYTHONUNBUFFERED=1
 
 ARG TORCH_VERSION=2.8.0
 
