@@ -2,10 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+ENV PIP_NO_CACHE_DIR=1
 
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+ARG TORCH_VERSION=2.8.0
+
+COPY requirements-runtime.txt requirements-runtime.txt
+
+RUN pip install --upgrade pip \
+    && pip install -r requirements-runtime.txt \
+    && pip install --index-url https://download.pytorch.org/whl/cpu torch==${TORCH_VERSION}
 
 COPY . .
 

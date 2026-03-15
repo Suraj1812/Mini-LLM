@@ -74,6 +74,7 @@ This repo is set up for Railway already:
 - `railway.json` defines the start command, restart policy, and `/api/health` healthcheck.
 - The server listens on Railway's injected `PORT` automatically.
 - If you attach a Railway Volume, the app will automatically use `RAILWAY_VOLUME_MOUNT_PATH` for model artifacts.
+- The Docker build installs the CPU-only PyTorch wheel so the Railway image stays under the plan limit.
 
 Recommended Railway setup:
 
