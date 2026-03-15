@@ -46,6 +46,18 @@ class Settings:
     max_training_chars: int
     max_request_bytes: int
     log_level: str
+    model_embed_dim: int = 256
+    model_num_heads: int = 4
+    model_num_layers: int = 6
+    model_dropout: float = 0.1
+    weight_decay: float = 0.1
+    gradient_clip: float = 1.0
+    validation_split: float = 0.1
+    generation_temperature: float = 0.8
+    generation_top_k: int = 20
+    generation_top_p: float = 0.9
+    repetition_penalty: float = 1.1
+    tokenizer_vocab_size: int = 2048
 
     @property
     def data_path(self):
@@ -83,6 +95,18 @@ def get_settings():
         max_training_chars=_env_int("MINI_LLM_MAX_TRAINING_CHARS", 100000),
         max_request_bytes=_env_int("MINI_LLM_MAX_REQUEST_BYTES", 1048576),
         log_level=os.getenv("MINI_LLM_LOG_LEVEL", "INFO"),
+        model_embed_dim=_env_int("MINI_LLM_MODEL_EMBED_DIM", 256),
+        model_num_heads=_env_int("MINI_LLM_MODEL_NUM_HEADS", 4),
+        model_num_layers=_env_int("MINI_LLM_MODEL_NUM_LAYERS", 6),
+        model_dropout=_env_float("MINI_LLM_MODEL_DROPOUT", 0.1),
+        weight_decay=_env_float("MINI_LLM_WEIGHT_DECAY", 0.1),
+        gradient_clip=_env_float("MINI_LLM_GRADIENT_CLIP", 1.0),
+        validation_split=_env_float("MINI_LLM_VALIDATION_SPLIT", 0.1),
+        generation_temperature=_env_float("MINI_LLM_GENERATION_TEMPERATURE", 0.8),
+        generation_top_k=_env_int("MINI_LLM_GENERATION_TOP_K", 20),
+        generation_top_p=_env_float("MINI_LLM_GENERATION_TOP_P", 0.9),
+        repetition_penalty=_env_float("MINI_LLM_REPETITION_PENALTY", 1.1),
+        tokenizer_vocab_size=_env_int("MINI_LLM_TOKENIZER_VOCAB_SIZE", 2048),
     )
     settings.ensure_artifact_dir()
     return settings

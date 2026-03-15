@@ -47,6 +47,14 @@ class MiniLLMService:
                 output_dir=self.settings.artifacts_dir,
                 model_path=self.settings.model_path,
                 progress_callback=on_progress,
+                embed_dim=self.settings.model_embed_dim,
+                num_heads=self.settings.model_num_heads,
+                num_layers=self.settings.model_num_layers,
+                dropout=self.settings.model_dropout,
+                weight_decay=self.settings.weight_decay,
+                gradient_clip=self.settings.gradient_clip,
+                validation_split=self.settings.validation_split,
+                tokenizer_vocab_size=self.settings.tokenizer_vocab_size,
             )
             self.state.mark_ready(result["last_loss"])
             LOGGER.info("Training completed with loss %.4f", result["last_loss"])
@@ -65,4 +73,8 @@ class MiniLLMService:
             vocab_path=self.settings.vocab_path,
             merges_path=self.settings.merges_path,
             block_size=self.settings.default_block_size,
+            temperature=self.settings.generation_temperature,
+            top_k=self.settings.generation_top_k,
+            top_p=self.settings.generation_top_p,
+            repetition_penalty=self.settings.repetition_penalty,
         )
