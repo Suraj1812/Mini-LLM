@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,38 +8,6 @@
   </head>
   <body>
     <main class="shell">
-      <section class="hero">
-        <p class="eyebrow">Mini LLM API</p>
-        <h1>Train and serve the current model through a hardened web backend.</h1>
-        <p class="lede">
-          Same feature set, cleaner deployment path: paste training text, build
-          the model artifacts, and generate output from the saved weights.
-        </p>
-      </section>
-
-      <section class="status-card">
-        <div>
-          <p class="label">Backend Status</p>
-          <h2 id="status-title">Checking...</h2>
-          <p id="status-message" class="muted">Loading current state.</p>
-        </div>
-        <dl class="status-grid">
-          <div>
-            <dt>Model Ready</dt>
-            <dd id="status-ready">No</dd>
-          </div>
-          <div>
-            <dt>Last Loss</dt>
-            <dd id="status-loss">-</dd>
-          </div>
-          <div>
-            <dt>Trained At</dt>
-            <dd id="status-trained-at">-</dd>
-          </div>
-        </dl>
-        <p id="status-error" class="error" hidden></p>
-      </section>
-
       <section class="grid">
         <form id="train-form" class="panel">
           <div class="panel-head">
@@ -83,7 +51,9 @@
           <button id="generate-button" type="submit">Generate text</button>
           <label class="field">
             <span>Output</span>
-            <pre id="output" class="output">Your generated text will appear here.</pre>
+            <pre id="output" class="output">
+Your generated text will appear here.</pre
+            >
           </label>
         </form>
       </section>
